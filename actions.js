@@ -191,3 +191,7 @@
     duckId
 }
 
+{
+    type: REMOVE_LIKE,
+    duckId
+}
