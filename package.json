@@ -29,7 +29,8 @@
     "react-router": "^2.8.1",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "thunk": "0.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.6",
