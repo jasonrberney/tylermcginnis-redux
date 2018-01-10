@@ -1,8 +1,8 @@
 const ADD_LISTENER = 'ADD_LISTENER'
 
-export function assListener () {
+export function addListener (listenerId) {
     return {
-        ADD_LISTENER,
+        type: ADD_LISTENER,
         listenerId
     }
 }
