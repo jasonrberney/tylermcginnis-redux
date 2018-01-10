@@ -4,17 +4,17 @@ import { Navigation } from 'components'
 import { container, innerContainer } from './styles.css'
 import { bindActionCreators } from 'redux'
 import * as userActionCreators from 'redux/modules/users'
-import { formatUserInfo} from 'helpers/utils'
-import {firebaseAuth } from 'config/constants'
+import { formatUserInfo } from 'helpers/utils'
+import { firebaseAuth } from 'config/constants'
 
 const MainContainer = React.createClass({
   propTypes: {
     isAuthed: PropTypes.bool.isRequired,
     authUser: PropTypes.func.isRequired,
-    removeFetchingUser: PropTypes.func.isRequired,
     fetchingUserSuccess: PropTypes.func.isRequired,
+    removeFetchingUser: PropTypes.func.isRequired,
   },
-  contextType: {
+  contextTypes: {
     router: PropTypes.object.isRequired,
   },
   componentDidMount () {
@@ -27,15 +27,14 @@ const MainContainer = React.createClass({
         if (this.props.location.pathname === '/') {
           this.context.router.replace('feed')
         }
-      }
-      else {
-        this.props.removeFetchingUser()
+      } else {
+         this.props.removeFetchingUser()
       }
     })
   },
   render () {
     return this.props.isFetching === true
-      ? null 
+      ? null
       : <div className={container}>
           <Navigation isAuthed={this.props.isAuthed} />
           <div className={innerContainer}>
@@ -46,6 +45,6 @@ const MainContainer = React.createClass({
 })
 
 export default connect(
-  (state) => ({isAuthed: state.isAuthed, isFetching: state.isFetching}),
+  ({users}) => ({isAuthed: users.isAuthed, isFetching: users.isFetching}),
   (dispatch) => bindActionCreators(userActionCreators, dispatch)
 )(MainContainer)
