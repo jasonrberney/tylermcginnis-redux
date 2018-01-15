@@ -1,6 +1,7 @@
 import { saveDuck } from 'helpers/api'
 import { closeModal } from './modal'
 import { addSingleUsersDuck } from './usersDucks'
+import { fetchDuck } from '../../helpers/api';
 
 const FETCHING_DUCK = 'FETCHING_DUCK'
 const FETCHING_DUCK_ERROR = 'FETCHING_DUCK_ERROR'
@@ -30,7 +31,7 @@ function fetchingDuckSuccess (duck) {
   }
 }
 
-function removeFetching () {
+export function removeFetching () {
   return {
     type: REMOVE_FETCHING,
   }
@@ -47,6 +48,15 @@ export function addMultipleDucks (ducks) {
   return {
     type: ADD_MULTIPLE_DUCKS,
     ducks,
+  }
+}
+
+export function fetchAndHandleDuck(duckId){
+  return function (dispatch) {
+    dispatch(fetchingDuck())
+    fetchDuck(duckId)
+      .then((duck) => dispatch(fetchingDuckSuccess(duck)))
+      .catch((error) => dispatch(fetchingDuckError(error)))
   }
 }
 
